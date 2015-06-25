@@ -4,7 +4,7 @@ namespace SON\Cliente\Types;
 
 use SON\Cliente\ClienteAbstract;
 
-class ClientePJ extends ClienteAbstract {
+class ClientePJ extends ClienteAbstract implements PJInterface {
 
     private $cnpj;
 
@@ -42,16 +42,4 @@ class ClientePJ extends ClienteAbstract {
         return "Pessoa Jurídica";
     }
 
-    public function setClassificacao($tipo) {
-        $this->classificacao = $tipo;
-    }
-
-    public function getClassificacao() {
-        return $this->classificacao;
-    }
-
-    public function setEnderecoCobranca($endereco)
-    {
-        $this->enderecoCobranca = $endereco;
-    }
 }

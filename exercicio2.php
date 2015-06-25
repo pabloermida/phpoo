@@ -1,4 +1,5 @@
 <?php
+
 define('CLASS_DIR', 'src/');
 set_include_path(get_include_path().PATH_SEPARATOR.CLASS_DIR);
 spl_autoload_register();
@@ -82,7 +83,7 @@ foreach ($cliente as $key=>$value)
                     <p>Endereço: <?=$value->getEndereco();?></p>
                     <p>Endereço de cobrança: <?=$value->getEnderecoCobranca();?></p>
                     <p>Telefone: <?=$value->getTelefone();?></p>
-                    <p>Classificação: </p>
+                    <p>Grau de Importância: <?=$value->getGrauImportancia();?></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

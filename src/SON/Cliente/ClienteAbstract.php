@@ -2,13 +2,13 @@
 
 namespace SON\Cliente;
 
-abstract class ClienteAbstract {
+abstract class ClienteAbstract implements GrauImportanciaInterface, EnderecoCobrancaInterface {
 
     protected $nome;
     protected $endereco;
     protected $enderecoCobranca;
     protected $telefone;
-    protected $nivel;
+    protected $grau;
 
     /**
      * @return mixed
@@ -42,14 +42,6 @@ abstract class ClienteAbstract {
         $this->endereco = $endereco;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEnderecoCobranca()
-    {
-        return $this->enderecoCobranca;
-    }
-
 
     /**
      * @return mixed
@@ -70,21 +62,38 @@ abstract class ClienteAbstract {
     /**
      * @return mixed
      */
-    public function getNivel()
+    public function getGrauImportancia()
     {
-        return $this->nivel;
+        return $this->grau;
     }
 
     /**
      * @param mixed $nivel
      */
-    public function setNivel($nivel)
+    public function setGrauImportancia($grau)
     {
-        $this->nivel = $nivel;
+        $this->nivel = $grau;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEnderecoCobranca()
+    {
+        return $this->enderecoCobranca;
+    }
+    /**
+     * @return mixed
+     */
+    public function setEnderecoCobranca($enderecoCobranca)
+    {
+        $this->enderecoCobranca = $enderecoCobranca;
+    }
+
+
 
     abstract protected function getTipoCliente();
     abstract protected function getIdDocumento();
-    abstract protected function setEnderecoCobranca($endereco);
+
 
 }

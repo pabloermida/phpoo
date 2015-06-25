@@ -1,17 +1,19 @@
 <?php
+use \SON\Cliente\Types\ClientePF;
+use \SON\Cliente\Types\ClientePJ;
 
-define('CLASS_DIR', 'src/');
+define('CLASS_DIR', '../src/');
 set_include_path(get_include_path().PATH_SEPARATOR.CLASS_DIR);
 spl_autoload_register();
 
 $cliente = array();
 for ($i=0; $i<5; $i++)
 {
-    $cliente[] = new \SON\Cliente\Types\ClientePF("Cliente " . ($i + 1) , 1111111111 + $i, "Endereço " . ($i + 1), 11111111 + $i);
+    $cliente[] = new ClientePF("Cliente " . ($i + 1) , 1111111111 + $i, "Endereço " . ($i + 1), 11111111 + $i);
 }
 for ($i=5; $i<10; $i++)
 {
-    $cliente[] = new \SON\Cliente\Types\ClientePJ("Cliente " . ($i + 1) , 1111111111 + $i, "Endereço " . ($i + 1), 11111111 + $i);
+    $cliente[] = new ClientePJ("Cliente " . ($i + 1) , 1111111111 + $i, "Endereço " . ($i + 1), 11111111 + $i);
 }
 
 ?>

@@ -6,9 +6,16 @@ abstract class ClienteAbstract implements GrauImportanciaInterface, EnderecoCobr
 
     protected $nome;
     protected $endereco;
-    protected $enderecoCobranca;
     protected $telefone;
+    protected $enderecoCobranca;
     protected $grau;
+
+    public function __construct($nome, $endereco, $telefone)
+    {
+        $this->nome = $nome;
+        $this->endereco = $endereco;
+        $this->telefone = $telefone;
+    }
 
     /**
      * @return mixed

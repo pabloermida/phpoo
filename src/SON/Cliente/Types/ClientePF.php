@@ -6,15 +6,13 @@ use SON\Cliente\ClienteAbstract;
 
 class ClientePF extends ClienteAbstract implements PFInterface {
 
-    private $cpf;
+    protected $cpf;
 
 
     public function __construct($nome, $cpf, $endereco, $telefone)
     {
-        $this->nome = $nome;
+        parent::__construct($nome, $endereco, $telefone);
         $this->cpf = $cpf;
-        $this->endereco = $endereco;
-        $this->telefone = $telefone;
     }
 
     public function getIdDocumento()

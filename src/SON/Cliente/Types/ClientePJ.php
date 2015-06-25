@@ -6,14 +6,12 @@ use SON\Cliente\ClienteAbstract;
 
 class ClientePJ extends ClienteAbstract implements PJInterface {
 
-    private $cnpj;
+    protected $cnpj;
 
     public function __construct($nome, $cnpj, $endereco, $telefone)
     {
-        $this->nome = $nome;
+        parent::__construct($nome, $endereco, $telefone);
         $this->cnpj = $cnpj;
-        $this->endereco = $endereco;
-        $this->telefone = $telefone;
     }
 
     public function getIdDocumento()

@@ -37,7 +37,7 @@ class ClientePJ extends ClienteAbstract implements PJInterface {
 
     public function getTipoCliente()
     {
-        return "Pessoa Jurídica";
+        return "PJ";
     }
 
 }

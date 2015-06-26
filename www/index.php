@@ -1,20 +1,27 @@
 <?php
 use \SON\Cliente\Types\ClientePF;
 use \SON\Cliente\Types\ClientePJ;
+use \SON\BD\PersistBD;
 
 define('CLASS_DIR', '../src/');
 set_include_path(get_include_path().PATH_SEPARATOR.CLASS_DIR);
 spl_autoload_register();
 
+$pdo = new PersistBD(new PDO('mysql:host=localhost;dbname=phpoo', "root", ""));
+
 $cliente = array();
 for ($i=0; $i<5; $i++)
 {
     $cliente[] = new ClientePF("Cliente " . ($i + 1) , 1111111111 + $i, "Endereço " . ($i + 1), 11111111 + $i);
+    $pdo->persist($cliente[$i]);
 }
 for ($i=5; $i<10; $i++)
 {
     $cliente[] = new ClientePJ("Cliente " . ($i + 1) , 1111111111 + $i, "Endereço " . ($i + 1), 11111111 + $i);
+    $pdo->persist($cliente[$i]);
 }
+
+$pdo->flush();
 
 ?>
 <!DOCTYPE html>
@@ -58,10 +65,11 @@ for ($i=5; $i<10; $i++)
         </tr>
         </thead>
         <?php
-        foreach ($cliente as $key=>$value)
+        $clienteBD = $pdo->getClientes();
+        foreach($clienteBD as $row)
         {
             ?>
-            <tr><td><?=$key?></td><td><a href="#" data-toggle="modal" data-target="#clienteModal<?=$key?>"><?=$value->getNome();?></a></td><td><?=$value->getIdDocumento();?></td><td><?=$value->getTipoCliente();?></td></tr>
+            <tr><td><?=$row['id']?></td><td><a href="#" data-toggle="modal" data-target="#clienteModal<?=$row['id']?>"><?=$row['nome'];?></a></td><td><?=($row['tipo'] == "PF" ? $row['cpf'] : $row['cnpj']);?></td><td><?=$row['tipo'];?></td></tr>
         <?php
         }
         ?>
@@ -69,10 +77,11 @@ for ($i=5; $i<10; $i++)
     </table>
 </div><!-- /.container -->
 <?php
-foreach ($cliente as $key=>$value)
+$clienteBD = $pdo->getClientes();
+foreach ($clienteBD as $row)
 {
     ?>
-    <div id="clienteModal<?=$key?>" class="modal fade">
+    <div id="clienteModal<?=$row['id']?>" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -80,12 +89,12 @@ foreach ($cliente as $key=>$value)
                     <h4 class="modal-title">Informações do Cliente</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Nome: <?=$value->getNome();?></p>
-                    <p>CPF/CNPJ: <?=$value->getIdDocumento();?></p>
-                    <p>Endereço: <?=$value->getEndereco();?></p>
-                    <p>Endereço de cobrança: <?=$value->getEnderecoCobranca();?></p>
-                    <p>Telefone: <?=$value->getTelefone();?></p>
-                    <p>Grau de Importância: <?=$value->getGrauImportancia();?></p>
+                    <p>Nome: <?=$row['nome'];?></p>
+                    <p>CPF/CNPJ: <?=($row['tipo'] == "PF" ? $row['cpf'] : $row['cnpj']);?></p>
+                    <p>Endereço: <?=$row['endereco'];?></p>
+                    <p>Endereço de cobrança: <?=$row['endereco_cobranca'];?></p>
+                    <p>Telefone: <?=$row['telefone'];?></p>
+                    <p>Grau de Importância: <?=$row['grau'];?></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

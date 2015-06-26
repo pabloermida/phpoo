@@ -38,7 +38,7 @@ class ClientePF extends ClienteAbstract implements PFInterface {
 
     public function getTipoCliente()
     {
-        return "Pessoa Física";
+        return "PF";
     }
 
 
